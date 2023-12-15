@@ -7,7 +7,7 @@ O3DE (Open 3D Engine) is an open-source, real-time, multi-platform 3D engine tha
 This branch of O3DE is an experimental branch focused on the 'minimization' of O3DE down to the core components. The experiment asks the following questions:
 
 1. How small can O3DE's engine base get, and still remain O3DE?
-2. How many dependencies can be removed, and still remain functional.
+2. How many dependencies can be removed, and still remain functional?
 
 The goal of this branch is to identify the smallest possible version of O3DE, one that is easy to build off of later. 
 
