@@ -2,10 +2,24 @@
 
 O3DE (Open 3D Engine) is an open-source, real-time, multi-platform 3D engine that enables developers and content creators to build AAA games, cinema-quality 3D worlds, and high-fidelity simulations without any fees or commercial obligations.
 
+# Minimal
+
+This branch of O3DE is an experimental branch focused on the 'minimization' of O3DE down to the core components. The experiment asks the following questions:
+
+1. How small can O3DE's engine base get, and still remain O3DE?
+2. How many dependencies can be removed, and still remain functional.
+
+The goal of this branch is to identify the smallest possible version of O3DE, one that is easy to build off of later. 
+
+This is meant to benefit the O3DE community as a reference point to how the engine works overall. This will increase comprehension, and empower the community to tackle the bigger problems in O3DE.
+
 ## Contribute
 For information about contributing to Open 3D Engine, visit [https://o3de.org/docs/contributing/](https://o3de.org/docs/contributing/).
 
 ## Updates to this readme
+December 15, 2023
+- Added descriptions specific to the minimal branch of O3DE
+
 July 06, 2021
 - Switch licenses to APACHE-2.0 OR MIT
 
