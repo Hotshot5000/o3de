@@ -13,6 +13,10 @@ The goal of this branch is to identify the smallest possible version of O3DE, on
 
 This is meant to benefit the O3DE community as a reference point to how the engine works overall. This will increase comprehension, and empower the community to tackle the bigger problems in O3DE.
 
+For these purposes, this branch must remain independent of development.
+
+The minimal branch is based on Point Release 23.10.1.
+
 ## Contribute
 For information about contributing to Open 3D Engine, visit [https://o3de.org/docs/contributing/](https://o3de.org/docs/contributing/).
 
