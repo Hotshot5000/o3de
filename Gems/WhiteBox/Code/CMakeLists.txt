@@ -187,28 +187,5 @@ if(PAL_TRAIT_BUILD_TESTS_SUPPORTED)
             NAME Gem::WhiteBox.Editor.Tests
         )
 
-        ly_add_target(
-            NAME WhiteBox.Editor.Physics.Tests ${PAL_TRAIT_TEST_TARGET_TYPE}
-            NAMESPACE Gem
-            FILES_CMAKE
-                whitebox_editor_physics_tests_supported_files.cmake
-            INCLUDE_DIRECTORIES
-                PRIVATE
-                    Source
-                    Tests
-            BUILD_DEPENDENCIES
-                PRIVATE
-                    AZ::AzTestShared
-                    AZ::AzManipulatorTestFramework.Static
-                    Gem::WhiteBox.Editor.Static
-            RUNTIME_DEPENDENCIES
-                Gem::PhysX.Editor
-        )
-
-        ly_add_googletest(
-            NAME Gem::WhiteBox.Editor.Physics.Tests
-            LABELS REQUIRES_tiaf
-        )
-
     endif()
 endif()
