@@ -1,0 +1,36 @@
+AssetProcessor: 
+==================================================================
+AssetProcessor: Trace::Error
+ D:/workspace/o3de/Code/Tools/AssetProcessor/native/utilities/BatchApplicationManager.cpp(70): 'void __cdecl BatchApplicationManager::OnErrorMessage(const char *)'
+AssetProcessor: Path 'C:/O3DE/23.10.1/bin/Windows/profile/Default' is not a valid project path.
+AssetProcessor: ==================================================================
+ComponentApplicationLifecycle: 
+==================================================================
+ComponentApplicationLifecycle: Trace::Warning
+ D:/workspace/o3de/Code/Framework/AzCore/AzCore/Component/ComponentApplicationLifecycle.cpp(33): 'bool __cdecl AZ::ComponentApplicationLifecycle::SignalEvent(class AZ::SettingsRegistryInterface &,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >)'
+ComponentApplicationLifecycle: Cannot signal event FileIOUnavailable because it is not a field of object "/O3DE/Application/LifecycleEvents". Please make sure the entry exists in the '<engine-root>/Registry/application_lifecycle_events.setreg" or in *.setreg within the project
+ComponentApplicationLifecycle: ==================================================================
+ComponentApplicationLifecycle: 
+==================================================================
+ComponentApplicationLifecycle: Trace::Warning
+ D:/workspace/o3de/Code/Framework/AzCore/AzCore/Component/ComponentApplicationLifecycle.cpp(33): 'bool __cdecl AZ::ComponentApplicationLifecycle::SignalEvent(class AZ::SettingsRegistryInterface &,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >)'
+ComponentApplicationLifecycle: Cannot signal event ConsoleUnavailable because it is not a field of object "/O3DE/Application/LifecycleEvents". Please make sure the entry exists in the '<engine-root>/Registry/application_lifecycle_events.setreg" or in *.setreg within the project
+ComponentApplicationLifecycle: ==================================================================
+ComponentApplicationLifecycle: 
+==================================================================
+ComponentApplicationLifecycle: Trace::Warning
+ D:/workspace/o3de/Code/Framework/AzCore/AzCore/Component/ComponentApplicationLifecycle.cpp(33): 'bool __cdecl AZ::ComponentApplicationLifecycle::SignalEvent(class AZ::SettingsRegistryInterface &,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >)'
+ComponentApplicationLifecycle: Cannot signal event SystemComponentsDeactivated because it is not a field of object "/O3DE/Application/LifecycleEvents". Please make sure the entry exists in the '<engine-root>/Registry/application_lifecycle_events.setreg" or in *.setreg within the project
+ComponentApplicationLifecycle: ==================================================================
+ComponentApplicationLifecycle: 
+==================================================================
+ComponentApplicationLifecycle: Trace::Warning
+ D:/workspace/o3de/Code/Framework/AzCore/AzCore/Component/ComponentApplicationLifecycle.cpp(33): 'bool __cdecl AZ::ComponentApplicationLifecycle::SignalEvent(class AZ::SettingsRegistryInterface &,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >)'
+ComponentApplicationLifecycle: Cannot signal event SettingsRegistryUnavailable because it is not a field of object "/O3DE/Application/LifecycleEvents". Please make sure the entry exists in the '<engine-root>/Registry/application_lifecycle_events.setreg" or in *.setreg within the project
+ComponentApplicationLifecycle: ==================================================================
+ComponentApplicationLifecycle: 
+==================================================================
+ComponentApplicationLifecycle: Trace::Warning
+ D:/workspace/o3de/Code/Framework/AzCore/AzCore/Component/ComponentApplicationLifecycle.cpp(33): 'bool __cdecl AZ::ComponentApplicationLifecycle::SignalEvent(class AZ::SettingsRegistryInterface &,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >,class AZStd::basic_string_view<char,struct AZStd::char_traits<char> >)'
+ComponentApplicationLifecycle: Cannot signal event SystemAllocatorPendingDestruction because it is not a field of object "/O3DE/Application/LifecycleEvents". Please make sure the entry exists in the '<engine-root>/Registry/application_lifecycle_events.setreg" or in *.setreg within the project
+ComponentApplicationLifecycle: ==================================================================

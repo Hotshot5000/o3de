@@ -179,6 +179,7 @@ function(query_gem_paths_from_external_subdirs output_gem_dirs gem_names registe
                 # additional newline automatically because "non-indented text is formatted in 
                 # line-wrapped paragraphs delimited by newlines"
                 list(JOIN registered_external_subdirs "\n  " external_subdirs_formatted)
+                message(${registered_external_subdirs})
                 message(SEND_ERROR "The gem \"${gem_name}\""
                 " could not be found in any gem.json from the following list of registered external subdirectories:"
                 "\n  ${external_subdirs_formatted}")
