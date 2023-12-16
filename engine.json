@@ -81,7 +81,6 @@
         "Gems/TextureAtlas",
         "Gems/TickBusOrderViewer",
         "Gems/UiBasics",
-        "Gems/Vegetation",
         "Gems/VideoPlaybackFramework",
         "Gems/VirtualGamepad",
         "Gems/WhiteBox"
@@ -97,9 +96,7 @@
         "PrefabBuilder",
         "SceneProcessing"
     ],
-    "projects": [
-        "AutomatedTesting"
-    ],
+    "projects": [],
     "templates": [
         "Templates/AssetGem",
         "Templates/CppToolGem",
