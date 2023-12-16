@@ -41,6 +41,7 @@ def export_standalone_project(ctx: exp.O3DEScriptExportContext,
                               monolithic_build: bool = True,
                               allow_registry_overrides: bool = False,
                               tools_build_path: pathlib.Path | None =None,
+                              assets_module_path: pathlib.Path | None =None,
                               launcher_build_path: pathlib.Path | None =None,
                               archive_output_format: str = "none",
                               fail_on_asset_errors: bool = False,
@@ -127,6 +128,11 @@ def export_standalone_project(ctx: exp.O3DEScriptExportContext,
     
     logger.info(f"Asset bundling path set to {asset_bundling_path}")
 
+    if not assets_module_path:
+        assets_module_path = default_base_path / 'build/assets_module'
+    elif not assets_module_path.is_absolute():
+        assets_module_path = default_base_path / assets_module_path
+
     # Resolve (if possible) and validate any provided seedlist files
     validated_seedslist_paths = exp.validate_project_artifact_paths(project_path=ctx.project_path,
                                                                     artifact_paths=seedlist_paths)
@@ -173,17 +179,10 @@ def export_standalone_project(ctx: exp.O3DEScriptExportContext,
 
     # Optionally build the assets
     if should_build_all_assets:
-        asset_processor_path = exp.get_asset_processor_batch_path(tools_build_path=tools_build_path,
-                                                                  using_installer_sdk=is_installer_sdk,
-                                                                  tool_config=tool_config,
-                                                                  required=True)
-        logger.info(f"Using '{asset_processor_path}' to process the assets.")
         exp.build_assets(ctx=ctx,
-                         tools_build_path=tools_build_path,
+                         assets_module_path=assets_module_path,
                          engine_centric=engine_centric,
                          fail_on_ap_errors=fail_on_asset_errors,
-                         using_installer_sdk=is_installer_sdk,
-                         tool_config=tool_config,
                          logger=logger)
 
     # Generate the bundle
@@ -337,6 +336,10 @@ def export_standalone_parse_args(o3de_context: exp.O3DEScriptExportContext, expo
         default_tools_build_path = export_config.get_value(exp.SETTINGS_DEFAULT_BUILD_TOOLS_PATH.key, exp.SETTINGS_DEFAULT_BUILD_TOOLS_PATH.default)
         parser.add_argument('-tbp', '--tools-build-path', type=pathlib.Path, default=pathlib.Path(default_tools_build_path),
                             help=f"Designates where the build files for the O3DE toolchain are generated. If not specified, default is '{default_tools_build_path}'.")
+        
+        default_assets_build_path = export_config.get_value(exp.SETTINGS_DEFAULT_BUILD_ASSETS_PATH.key, exp.SETTINGS_DEFAULT_BUILD_ASSETS_PATH.default)
+        parser.add_argument('-abdp', '--assets-build-path', type=pathlib.Path, default=pathlib.Path(default_assets_build_path),
+                            help=f"Designates where the build files for the Project assets are generated. If not specified, default is '{default_assets_build_path}'.")
 
         default_launcher_build_path = export_config.get_value(exp.SETTINGS_DEFAULT_LAUNCHER_TOOLS_PATH.key, exp.SETTINGS_DEFAULT_LAUNCHER_TOOLS_PATH.default)
         parser.add_argument('-lbp', '--launcher-build-path', type=pathlib.Path, default=pathlib.Path(default_launcher_build_path),
@@ -483,6 +486,7 @@ def export_standalone_run_command(o3de_context, args, export_config: command_uti
                                   engine_centric=option_build_engine_centric,
                                   allow_registry_overrides=option_allow_registry_overrrides,
                                   tools_build_path=args.tools_build_path,
+                                  assets_module_path=args.assets_build_path,
                                   launcher_build_path=args.launcher_build_path,
                                   archive_output_format=args.archive_output,
                                   monolithic_build=option_build_monolithically,

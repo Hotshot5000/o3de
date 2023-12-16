@@ -159,20 +159,20 @@ def test_export_script(tmp_path,
     pytest.param(False, True)
 ])
 def test_build_assets(tmp_path, engine_centric, fail_on_ap_errors):
-
+    process_command_cache = []
+    def cache_command(*args, **kwargs):
+        nonlocal process_command_cache
+        process_command_cache.append({"args": args[0], "kwargs":kwargs})
     test_project_name = "TestProject"
     test_project_path = tmp_path / "project"
     test_engine_path = tmp_path / "engine"
-    test_tools_build_path = (test_project_path / "build" / "test") if engine_centric else (test_engine_path / "build" / "test")
-    test_tools_build_path.mkdir(parents=True)
-    test_asset_processor_batch_path = test_tools_build_path / "AssetProcessorBatch"
-    test_asset_processor_batch_path.write_bytes(b'fake processor')
+    test_assets_build_path = (test_project_path / "build" / "assets_module") if engine_centric else (test_engine_path / "build" / "assets_module")
+    test_assets_build_path.mkdir(parents=True)
 
     # Run through a mock success and mock failure run of AssetProcessorBatch
     for test_process_return_values in [0, 1]:
 
-        with patch("o3de.export_project.process_command", return_value=test_process_return_values) as mock_process_command, \
-             patch("o3de.export_project.get_asset_processor_batch_path", return_value=test_asset_processor_batch_path):
+        with patch("o3de.export_project.process_command", return_value=test_process_return_values) as mock_process_command:
 
             mock_ctx = create_autospec(O3DEScriptExportContext)
             mock_ctx.project_path = test_project_path
@@ -181,30 +181,27 @@ def test_build_assets(tmp_path, engine_centric, fail_on_ap_errors):
 
             try:
                 build_assets(ctx=mock_ctx,
-                             tools_build_path=test_tools_build_path,
+                             assets_module_path=test_assets_build_path,
                              engine_centric=engine_centric,
                              fail_on_ap_errors=fail_on_ap_errors)
             except ExportProjectError:
+                print("exception encountered", test_process_return_values)
                 ap_error_raised = True
             else:
                 ap_error_raised = False
-
-            mock_build_assets_process_input = mock_process_command.call_args_list[0][0][0]
-
-            # Expected process command to asset processor: <AssetProcessorBatchPath> --project-path <Project Path>
-            expected_build_assets_args = [
-                test_asset_processor_batch_path,
-                "--project-path",
-                test_project_path
-            ]
-            # Validate the expected arguments
-            assert mock_build_assets_process_input == expected_build_assets_args
 
             # Validate the 'fail_on_ap_errors' option if applicable
             if test_process_return_values == 1:
                 assert ap_error_raised == fail_on_ap_errors
             else:
                 assert not ap_error_raised
+
+            # Validate the expected arguments
+            if test_process_return_values == 0:
+                assert mock_process_command.call_args_list[0].args[0] == ['cmake', '-B', test_assets_build_path]
+                assert mock_process_command.call_args_list[1].args[0] == ['cmake', '--build', test_assets_build_path, '--target', f"{test_project_name}.Assets", '--config profile']
+                
+            
 
 
 @pytest.mark.parametrize("engine_centric, additional_cmake_configure_options, additional_build_args", [

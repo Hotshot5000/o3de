@@ -577,11 +577,9 @@ def get_asset_bundler_batch_path(tools_build_path: pathlib.Path,
 
 
 def build_assets(ctx: O3DEScriptExportContext,
-                 tools_build_path: pathlib.Path,
+                 assets_module_path: pathlib.Path, 
                  engine_centric: bool,
                  fail_on_ap_errors: bool,
-                 using_installer_sdk: bool = False,
-                 tool_config: str = PREREQUISITE_TOOL_BUILD_CONFIG,
                  logger: logging.Logger = None) -> int:
     """
     Build the assets for the project
@@ -594,16 +592,22 @@ def build_assets(ctx: O3DEScriptExportContext,
     @return: None
     """
 
-    # Make sure `AssetProcessorBatch` is available
-    asset_processor_batch_path = get_asset_processor_batch_path(tools_build_path, using_installer_sdk, tool_config=tool_config, required=True)
-    if not asset_processor_batch_path.exists():
-        raise ExportProjectError("Missing AssetProcessorBatch. The pre-requisite tools must be built first.")
-
     # Build the project assets with the {project_name}.Assets custom target
     if logger:
         logger.info(f"Processing assets for {ctx.project_name}")
-
-    cmake_build_assets_command = [asset_processor_batch_path, "--project-path", ctx.project_path]
+    
+    cmake_configure_assets_command = ['cmake', '-B', assets_module_path]
+    ret = process_command(cmake_configure_assets_command,
+                          cwd=ctx.engine_path if engine_centric else ctx.project_path)
+    print("RET1", ret)
+    if ret != 0:
+        if fail_on_ap_errors:
+            raise ExportProjectError(f"Error configuring assets for project {ctx.project_name}.")
+        else:
+            if logger:
+                logger.warning("Failed to configure assets.")
+    print("RET2", ret)
+    cmake_build_assets_command  = ['cmake', '--build', assets_module_path, '--target', f"{ctx.project_name}.Assets", '--config profile']
     ret = process_command(cmake_build_assets_command,
                           cwd=ctx.engine_path if engine_centric else ctx.project_path)
     if ret != 0:
@@ -1141,6 +1145,10 @@ SETTINGS_DEFAULT_BUILD_TOOLS_PATH = register_setting(key='default.build.tools.pa
 SETTINGS_DEFAULT_LAUNCHER_TOOLS_PATH = register_setting(key='default.launcher.build.path',
                                                         description='Designates where the launcher build files (Game/Server/Unified) are generated.',
                                                         default='build/launcher')
+
+SETTINGS_DEFAULT_BUILD_ASSETS_PATH = register_setting(key='default.build.assets.path',
+                                                     description='Designates where the build files for the Project Assets are generated.',
+                                                     default='build/assets_module')
 
 SETTINGS_DEFAULT_ASSET_BUNDLING_PATH = register_setting(key='asset.bundling.path',
                                                         description='Designates where the artifacts from the asset bundling process will be written to before creation of the package.',

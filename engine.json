@@ -44,7 +44,6 @@
         "Gems/GraphModel",
         "Gems/HttpRequestor",
         "Gems/ImGui",
-        "Gems/LandscapeCanvas",
         "Gems/LmbrCentral",
         "Gems/LocalUser",
         "Gems/LyShine",

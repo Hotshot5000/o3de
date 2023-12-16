@@ -446,14 +446,24 @@ def test_asset_processor_combinations(tmp_path, is_engine_centric, use_sdk, has_
                 test_tools_build_path = None if not base_path else base_path / 'build/tools'
                 test_tools_sdk_path = (test_engine_path / 'bin/Windows/profile/Default')
 
+                test_assets_build_path = None if not base_path else base_path / 'build/assets_module' 
+
                 cannot_build_monolithic = (use_sdk and not has_monolithic and use_monolithic)
                 selected_tools_build_path = test_tools_build_path if not use_sdk else test_tools_sdk_path
+
+                selected_assets_tool_build_path = test_assets_build_path
 
                 if not selected_tools_build_path:
                     selected_tools_build_path = test_o3de_base_path / 'build/tools'
                 
                 if not selected_tools_build_path.is_absolute():
-                    selected_tools_build_path = test_o3de_base_path / selected_tools_build_path                
+                    selected_tools_build_path = test_o3de_base_path / selected_tools_build_path
+
+                if not selected_assets_tool_build_path:
+                    selected_assets_tool_build_path = test_o3de_base_path / 'build/assets_module'
+                
+                if not selected_assets_tool_build_path.is_absolute():
+                    selected_assets_tool_build_path = test_o3de_base_path / selected_assets_tool_build_path
 
                 if cannot_build_monolithic:
                     pytest.raises(exp.ExportProjectError, export_standalone_project,
@@ -481,21 +491,15 @@ def test_asset_processor_combinations(tmp_path, is_engine_centric, use_sdk, has_
                                         monolithic_build=use_monolithic,
                                         engine_centric=is_engine_centric,
                                         tools_build_path=test_tools_build_path,
+                                        assets_module_path=test_assets_build_path,
                                         should_build_all_assets=True)
-                    mock_get_asset_processor_path.assert_called_once_with(tools_build_path=selected_tools_build_path,
-                                                                        using_installer_sdk=use_sdk,
-                                                                        tool_config='profile',
-                                                                        required=True)
                     
                     mock_build_assets.assert_called_once_with(ctx=mock_ctx,
-                                                            tools_build_path=selected_tools_build_path,
+                                                            assets_module_path=selected_assets_tool_build_path,
                                                             engine_centric=is_engine_centric,
                                                             fail_on_ap_errors=False,
-                                                            using_installer_sdk=use_sdk,
-                                                            tool_config='profile',
                                                             logger=mock_logger)
 
-                mock_get_asset_processor_path.reset_mock()
                 mock_build_assets.reset_mock()
 
                 #now test for when we skip the asset build process
@@ -1248,6 +1252,7 @@ def test_export_standalone_single(tmpdir, dum_fail_asset_err, dum_build_tools, d
                                     engine_centric=check_engine_centric,
                                     allow_registry_overrides=check_reg_override,
                                     tools_build_path=args.tools_build_path,
+                                    assets_module_path=args.assets_build_path,
                                     launcher_build_path=args.launcher_build_path,
                                     archive_output_format=check_archive_format,
                                     monolithic_build=check_mono,
@@ -1284,6 +1289,7 @@ def test_export_standalone_multipart_args(tmpdir, seedlists, seedfiles, levelnam
         mock_ctx.args = ['--output-path', str(tmpdir / 'output'), "--max-bundle-size", str(mock_bundle_size),
                          '-lbp', str(pathlib.PurePath('LauncherBuilds/Packages')),
                          '-tbp', str(tmpdir / 'tool_builds'),
+                         '-abdp', str(tmpdir / 'assets_module'),
                          '-abp', str(tmpdir / 'assets/bundling/paks'),
                          '-pl', mock_platform]
         
@@ -1346,6 +1352,7 @@ def test_export_standalone_multipart_args(tmpdir, seedlists, seedfiles, levelnam
                         engine_centric=False,
                         allow_registry_overrides=False,
                         tools_build_path=tmpdir / 'tool_builds',
+                        assets_module_path= tmpdir / 'assets_module',
                         launcher_build_path=pathlib.PurePath('LauncherBuilds/Packages'),
                         archive_output_format='none',
                         monolithic_build=False,
