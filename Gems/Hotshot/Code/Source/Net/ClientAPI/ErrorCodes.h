@@ -106,12 +106,14 @@ namespace Hotshot::Net::ClientAPI::ErrorCodes
 
     AZ::u32 ACCOUNT_USERNAME_TOO_SHORT = 20;
 
-    AZStd::string ACCOUNT_USERNAME_TOO_SHORT_STR = "Your username must have at least " + MINIMUM_USERNAME_LENGTH + " characters";
+    AZStd::string ACCOUNT_USERNAME_TOO_SHORT_STR =
+        "Your username must have at least " + AZStd::to_string(MINIMUM_USERNAME_LENGTH) + " characters";
 
 
     AZ::u32 ACCOUNT_PASSWORD_TOO_SHORT = 21;
 
-    AZStd::string ACCOUNT_PASSWORD_TOO_SHORT_STR = "Your password must have at least " + MINIMUM_PASSWORD_LENGTH + " characters";
+    AZStd::string ACCOUNT_PASSWORD_TOO_SHORT_STR =
+        "Your password must have at least " + AZStd::to_string(MINIMUM_USERNAME_LENGTH) + " characters";
 
 
     AZ::u32 GET_FRIENDS_LIST_CANNOT_GET_FRIEND_STATUS = 22;

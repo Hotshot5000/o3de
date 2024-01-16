@@ -27,9 +27,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_id;
         }
 
-        void SetId(AZ::u64 m_id)
+        void SetId(AZ::u64 id)
         {
-            this->m_id = m_id;
+            this->m_id = id;
         }
 
         AZStd::string GetUsername() const
@@ -37,9 +37,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_username;
         }
 
-        void SetUsername(const AZStd::string& m_username)
+        void SetUsername(const AZStd::string& username)
         {
-            this->m_username = m_username;
+            this->m_username = username;
         }
 
         AZStd::string GetPassword() const
@@ -47,9 +47,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_password;
         }
 
-        void SetPassword(const AZStd::string& m_password)
+        void SetPassword(const AZStd::string& password)
         {
-            this->m_password = m_password;
+            this->m_password = password;
         }
 
         AZ::u32 GetSessionsPlayed() const
@@ -57,9 +57,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_sessionsPlayed;
         }
 
-        void SetSessionsPlayed(AZ::u32 m_sessions_played)
+        void SetSessionsPlayed(AZ::u32 sessions_played)
         {
-            m_sessionsPlayed = m_sessions_played;
+            m_sessionsPlayed = sessions_played;
         }
 
         AZ::u32 GetSessionsWon() const
@@ -67,9 +67,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_sessionsWon;
         }
 
-        void SetSessionsWon(AZ::u32 m_sessions_won)
+        void SetSessionsWon(AZ::u32 sessions_won)
         {
-            m_sessionsWon = m_sessions_won;
+            m_sessionsWon = sessions_won;
         }
 
         AZ::u32 GetSessionsLost() const
@@ -77,9 +77,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_sessionsLost;
         }
 
-        void SetSessionsLost(AZ::u32 m_sessions_lost)
+        void SetSessionsLost(AZ::u32 sessions_lost)
         {
-            m_sessionsLost = m_sessions_lost;
+            m_sessionsLost = sessions_lost;
         }
 
         AZ::u32 GetKills() const
@@ -87,9 +87,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_kills;
         }
 
-        void SetKills(AZ::u32 m_kills)
+        void SetKills(AZ::u32 kills)
         {
-            this->m_kills = m_kills;
+            this->m_kills = kills;
         }
 
         AZ::u32 GetDeaths() const
@@ -97,9 +97,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_deaths;
         }
 
-        void SetDeaths(AZ::u32 m_deaths)
+        void SetDeaths(AZ::u32 deaths)
         {
-            this->m_deaths = m_deaths;
+            this->m_deaths = deaths;
         }
 
         AZ::u32 GetOnline() const
@@ -107,9 +107,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_online;
         }
 
-        void SetOnline(AZ::u32 m_online)
+        void SetOnline(AZ::u32 online)
         {
-            this->m_online = m_online;
+            this->m_online = online;
         }
 
         AZ::u32 GetInSession() const
@@ -117,9 +117,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_inSession;
         }
 
-        void SetInSession(AZ::u32 m_in_session)
+        void SetInSession(AZ::u32 in_session)
         {
-            m_inSession = m_in_session;
+            m_inSession = in_session;
         }
 
         AZ::u32 GetElo() const
@@ -127,9 +127,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_elo;
         }
 
-        void SetElo(AZ::u32 m_elo)
+        void SetElo(AZ::u32 elo)
         {
-            this->m_elo = m_elo;
+            this->m_elo = elo;
         }
 
         AZ::u64 GetLastOnlineTime() const
@@ -137,9 +137,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_lastOnlineTime;
         }
 
-        void SetLastOnlineTime(AZ::u64 m_last_online_time)
+        void SetLastOnlineTime(AZ::u64 last_online_time)
         {
-            m_lastOnlineTime = m_last_online_time;
+            m_lastOnlineTime = last_online_time;
         }
 
         AZ::u64 GetLastInSessionTime() const
@@ -147,9 +147,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_lastInSessionTime;
         }
 
-        void SetLastInSessionTime(AZ::u64 m_last_in_session_time)
+        void SetLastInSessionTime(AZ::u64 last_in_session_time)
         {
-            m_lastInSessionTime = m_last_in_session_time;
+            m_lastInSessionTime = last_in_session_time;
         }
 
         AZStd::string GetAuthToken() const
@@ -157,9 +157,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_authToken;
         }
 
-        void SetAuthToken(const AZStd::string& m_auth_token)
+        void SetAuthToken(const AZStd::string& auth_token)
         {
-            m_authToken = m_auth_token;
+            m_authToken = auth_token;
         }
     };
 }

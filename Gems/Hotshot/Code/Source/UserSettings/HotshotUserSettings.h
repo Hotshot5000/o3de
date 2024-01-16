@@ -2,7 +2,6 @@
 #include "Net/ClientAPI/Tables/Map.h"
 #include "Net/ClientAPI/Tables/User.h"
 
-#include <Atom/Bootstrap/BootstrapNotificationBus.h>
 #include <AzCore/EBus/EBus.h>
 #include <AzCore/IO/Path/Path.h>
 

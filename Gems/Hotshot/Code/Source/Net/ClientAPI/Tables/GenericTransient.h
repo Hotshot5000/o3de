@@ -16,9 +16,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_error;
         }
 
-        void SetError(const AZStd::string& m_error)
+        void SetError(const AZStd::string& error)
         {
-            this->m_error = m_error;
+            this->m_error = error;
         }
 
         AZ::u32 GetErrorCode() const
@@ -26,9 +26,9 @@ namespace Hotshot::Net::ClientAPI::Tables
             return m_errorCode;
         }
 
-        void SetErrorCode(AZ::u32 m_error_code)
+        void SetErrorCode(AZ::u32 error_code)
         {
-            m_errorCode = m_error_code;
+            m_errorCode = error_code;
         }
     };
 }

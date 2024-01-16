@@ -163,7 +163,7 @@ void Hotshot::UserSettings::SetLastShutdownSuccessful(bool shutdownSuccessful)
 
 AZ::u64 Hotshot::UserSettings::GetGameResourcesVersion()
 {
-    AZ::u64 gameResourcesVersion = -1;
+    AZ::u64 gameResourcesVersion = static_cast<AZ::u64>(-1);
     m_registry->Get(gameResourcesVersion, GameResourcesVersionKey.c_str());
     return gameResourcesVersion;
 }
